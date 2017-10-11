@@ -14,7 +14,6 @@ namespace IndranilKhedkar_ProgrammingExcercise
             int i = 1, categoryId, problemId;
 
             Console.WriteLine("---------------PLEASE SELECT PROBLEM CATEGORY---------------");
-            Console.WriteLine("------------------------------------------------------------");
             var categories = problemCategories.GetCategories();
             foreach (var category in categories)
             {
@@ -38,11 +37,13 @@ namespace IndranilKhedkar_ProgrammingExcercise
                     Console.WriteLine($"{p.ProblemId}. {p.Statement}");
                 }
 
-                Console.Write("SELECT PROBLEM ID: ");
+                Console.Write("\nSELECT PROBLEM ID: ");
                 while (!int.TryParse(Console.ReadLine(), out problemId))
                 {
                     Console.Write("PLEASE ENTER VALID CATEGORY ID: ");
                 }
+
+                Console.Clear();
 
                 var problem = problemStatements.GetProblemByProblemId(ProblemId: problemId.ToString(), category: problemCategories.GetCategoryUsingValue(categoryId));
                 if (problem == null)
@@ -51,7 +52,7 @@ namespace IndranilKhedkar_ProgrammingExcercise
                 {
                     Console.WriteLine("PREPARING FOR THE EXECUTION OF SELECTED PROGRAM");
                     Thread.Sleep(1500);
-                    Console.WriteLine("Yippeee! All set... Continuing with the execution of requested program");
+                    Console.WriteLine("Yippeee! All set... Continuing with the execution of requested program\n");
 
                     object obj = problem.ProblemClassObject;
                     MethodInfo methodInfo = obj.GetType().GetMethod("Run");
@@ -61,7 +62,7 @@ namespace IndranilKhedkar_ProgrammingExcercise
                         methodInfo.Invoke(obj, null);
                     }
 
-                    Console.WriteLine("PROGRAM EXEUCTED SUCCESSFULY");
+                    Console.WriteLine("\nPROGRAM EXEUCTED SUCCESSFULY");
                 }
             }
             Console.WriteLine("---------------------------------------------------------------------------------");
